@@ -52,3 +52,62 @@ def analyze_punctuation(text: str) -> dict:
         },
         'suggested_max_emdash': suggested_max_emdash,
     }
+
+
+def _split_sentences(text: str) -> list:
+    """Split text on .!? delimiters, strip whitespace, filter empty strings."""
+    parts = re.split(r'[.!?]+', text)
+    return [s.strip() for s in parts if s.strip()]
+
+
+def analyze_rhythm(text: str) -> dict:
+    """
+    Analyze sentence rhythm characteristics of the given text.
+
+    Returns a dict with:
+    - lengths: list of word counts per sentence
+    - mean: average sentence length (rounded to 1 decimal)
+    - stdev: standard deviation (rounded to 1 decimal, 0 if only 1 sentence)
+    - min: shortest sentence length
+    - max: longest sentence length
+    - fragment_rate: ratio of sentences with 4 or fewer words
+    - conjunction_starters: count of sentences starting with And/But/Or/So/Yet
+    - count: total sentence count
+    """
+    conjunctions = {'and', 'but', 'or', 'so', 'yet'}
+
+    sentences = _split_sentences(text)
+
+    if not sentences:
+        return {
+            'lengths': [],
+            'mean': 0,
+            'stdev': 0,
+            'min': 0,
+            'max': 0,
+            'fragment_rate': 0,
+            'conjunction_starters': 0,
+            'count': 0,
+        }
+
+    lengths = [len(s.split()) for s in sentences]
+    sentence_mean = round(mean(lengths), 1)
+    sentence_stdev = round(stdev(lengths), 1) if len(lengths) > 1 else 0
+    sentence_min = min(lengths)
+    sentence_max = max(lengths)
+    fragment_rate = sum(1 for l in lengths if l <= 4) / len(lengths)
+    conjunction_starters = sum(
+        1 for s in sentences
+        if s.split() and s.split()[0].lower() in conjunctions
+    )
+
+    return {
+        'lengths': lengths,
+        'mean': sentence_mean,
+        'stdev': sentence_stdev,
+        'min': sentence_min,
+        'max': sentence_max,
+        'fragment_rate': fragment_rate,
+        'conjunction_starters': conjunction_starters,
+        'count': len(sentences),
+    }

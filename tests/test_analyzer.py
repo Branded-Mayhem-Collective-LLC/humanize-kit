@@ -38,3 +38,30 @@ def test_suggested_max_emdash():
     text = "A - b. C - d. E - f. G - h. Only one \u2014 here."
     result = analyze_punctuation(text)
     assert result['suggested_max_emdash'] <= 2
+
+
+from engine.analyzer import analyze_rhythm
+
+def test_rhythm_sentence_lengths():
+    text = "Short. A much longer sentence with many words in it. Tiny."
+    result = analyze_rhythm(text)
+    assert len(result['lengths']) == 3
+    assert result['lengths'][0] == 1
+    assert result['lengths'][2] == 1
+
+def test_rhythm_stats():
+    text = "One two. Three four five. Six."
+    result = analyze_rhythm(text)
+    assert result['mean'] > 0
+    assert result['min'] == 1
+    assert result['max'] == 3
+
+def test_rhythm_fragment_rate():
+    text = "Done. Not a chance. This is a longer sentence with detail. Right. Absolutely."
+    result = analyze_rhythm(text)
+    assert result['fragment_rate'] >= 0.6
+
+def test_rhythm_conjunction_starters():
+    text = "Normal start. And then this. But also that. Or maybe not."
+    result = analyze_rhythm(text)
+    assert result['conjunction_starters'] == 3
