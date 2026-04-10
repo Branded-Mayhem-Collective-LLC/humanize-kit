@@ -472,7 +472,7 @@ def email_capture():
         import urllib.request
         data = json.dumps({'name': name, 'email': email}).encode('utf-8')
         req = urllib.request.Request(
-            'https://your-project.supabase.co/functions/v1/humanize-signup',
+            'https://hrgmzofvfrbxjhwjtbrc.supabase.co/functions/v1/humanize-signup',
             data=data,
             headers={'Content-Type': 'application/json'},
             method='POST',
