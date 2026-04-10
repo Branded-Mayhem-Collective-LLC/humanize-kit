@@ -93,3 +93,39 @@ def test_vocabulary_never_use_excludes_whitelist():
     text = "The crucial landscape of our enduring work is crucial."
     result = analyze_vocabulary(text)
     assert 'crucial' not in result['never_use']
+
+
+from engine.analyzer import analyze_structure, analyze_openings_closings, detect_sign_off
+
+def test_structure_paragraph_stats():
+    text = "Short para.\n\nA longer paragraph with multiple sentences. It keeps going. And more.\n\nTiny."
+    result = analyze_structure(text)
+    assert result['paragraph_count'] == 3
+    assert result['avg_paragraph_sentences'] > 0
+
+def test_openings_classification():
+    samples = [
+        "Why do brands fail? Because they lack spine.",
+        "I built this last week.",
+        "The problem is simple.",
+    ]
+    result = analyze_openings_closings(samples)
+    assert len(result['openings']) == 3
+    assert 'question' in [o['type'] for o in result['openings']]
+
+def test_sign_off_detection():
+    samples = [
+        "Some text.\n\n- Michael",
+        "More text.\n\n- Michael",
+        "Other text.\n\nBest, Sarah",
+    ]
+    result = detect_sign_off(samples)
+    assert result == '- Michael'
+
+def test_sign_off_none():
+    samples = [
+        "Just text ending normally.",
+        "Another piece without sign off.",
+    ]
+    result = detect_sign_off(samples)
+    assert result is None
