@@ -1,0 +1,237 @@
+{
+  "punctuation": {
+    "em_dash": 0,
+    "hyphen_dash": 0,
+    "parentheses": 0,
+    "ellipsis": 0,
+    "colons": 0,
+    "semicolons": 0,
+    "total_devices": 0,
+    "ratios": {
+      "hyphen_to_emdash": Infinity
+    },
+    "suggested_max_emdash": 0
+  },
+  "rhythm": {
+    "lengths": [
+      4,
+      5,
+      4,
+      14,
+      5,
+      8,
+      5,
+      6,
+      2
+    ],
+    "mean": 5.9,
+    "stdev": 3.4,
+    "min": 2,
+    "max": 14,
+    "fragment_rate": 0.3333333333333333,
+    "conjunction_starters": 0,
+    "count": 9
+  },
+  "vocabulary": {
+    "top_words": [
+      [
+        "michael",
+        3
+      ],
+      [
+        "problem",
+        1
+      ],
+      [
+        "simple",
+        1
+      ],
+      [
+        "brand",
+        1
+      ],
+      [
+        "spine",
+        1
+      ],
+      [
+        "messaging",
+        1
+      ],
+      [
+        "shifts",
+        1
+      ],
+      [
+        "every",
+        1
+      ],
+      [
+        "quarter",
+        1
+      ],
+      [
+        "build",
+        1
+      ],
+      [
+        "systems",
+        1
+      ],
+      [
+        "turn",
+        1
+      ],
+      [
+        "websites",
+        1
+      ],
+      [
+        "reason",
+        1
+      ],
+      [
+        "phone",
+        1
+      ],
+      [
+        "rings",
+        1
+      ],
+      [
+        "want",
+        1
+      ],
+      [
+        "show",
+        1
+      ],
+      [
+        "three",
+        1
+      ],
+      [
+        "things",
+        1
+      ],
+      [
+        "wrong",
+        1
+      ],
+      [
+        "site",
+        1
+      ],
+      [
+        "homepage",
+        1
+      ],
+      [
+        "buries",
+        1
+      ],
+      [
+        "cta",
+        1
+      ]
+    ],
+    "whitelisted": [],
+    "never_use": [
+      "additionally",
+      "bolstered",
+      "comprehensive",
+      "crucial",
+      "cutting-edge",
+      "delve",
+      "disrupt",
+      "ecosystem",
+      "emphasizing",
+      "empower",
+      "enduring",
+      "enhance",
+      "enhancing",
+      "exemplifies",
+      "features",
+      "fostering",
+      "furthermore",
+      "game-changer",
+      "garner",
+      "groundbreaking",
+      "harness",
+      "highlighting",
+      "holistic",
+      "interplay",
+      "intricacies",
+      "intricate",
+      "landscape",
+      "leverage",
+      "meticulous",
+      "meticulously",
+      "moreover",
+      "navigating",
+      "nestled",
+      "paradigm",
+      "pivotal",
+      "profound",
+      "renowned",
+      "robust",
+      "serves as",
+      "showcase",
+      "showcasing",
+      "stands as",
+      "streamline",
+      "synergy",
+      "tapestry",
+      "testament",
+      "unlock",
+      "valuable",
+      "vibrant"
+    ],
+    "unique_count": 28,
+    "total_count": 30
+  },
+  "structure": {
+    "paragraph_count": 8,
+    "avg_paragraph_sentences": 1.375,
+    "paragraph_variance": 0.7440238091428449,
+    "list_ratio": 0.375
+  },
+  "register": {
+    "formality_score": 0.0,
+    "has_contractions": false,
+    "has_fragments": true
+  },
+  "openings_closings": {
+    "openings": [
+      {
+        "type": "fragment",
+        "text": "The problem is simple."
+      },
+      {
+        "type": "personal",
+        "text": "I build systems that turn websites into the reason the phone rings."
+      },
+      {
+        "type": "story_hook",
+        "text": "Three things wrong with your site."
+      }
+    ],
+    "closings": [
+      {
+        "type": "fragment",
+        "text": "- Michael"
+      },
+      {
+        "type": "fragment",
+        "text": "- Michael"
+      },
+      {
+        "type": "fragment",
+        "text": "- Michael"
+      }
+    ]
+  },
+  "sign_off": "- Michael",
+  "samples_used": 3,
+  "total_words": 53
+}

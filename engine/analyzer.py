@@ -341,3 +341,24 @@ def detect_sign_off(samples: list) -> str | None:
             return sign_off
 
     return None
+
+
+def build_profile(samples: list) -> dict:
+    """
+    Compose all analyzers into a single voice profile dict.
+
+    Returns a dict containing results from all sub-analyzers plus
+    metadata about the sample set.
+    """
+    combined_text = '\n\n'.join(samples)
+    return {
+        'punctuation': analyze_punctuation(combined_text),
+        'rhythm': analyze_rhythm(combined_text),
+        'vocabulary': analyze_vocabulary(combined_text),
+        'structure': analyze_structure(combined_text),
+        'register': analyze_register(combined_text),
+        'openings_closings': analyze_openings_closings(samples),
+        'sign_off': detect_sign_off(samples),
+        'samples_used': len(samples),
+        'total_words': len(combined_text.split()),
+    }
