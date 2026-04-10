@@ -162,6 +162,14 @@ version: 1.0
 3. Offer: "Want to test it? Paste any AI-generated text and I'll run `/humanize` using your new profile."
 4. Offer: "Want to add platform-specific overrides? (LinkedIn voice, email voice, Instagram voice)"
 
+## Post-Processing Note
+
+After generating content with `/humanize`, run it through the em dash post-processor:
+```
+python3 ~/.claude/skills/humanize/de_emdash.py --max-emdash 2
+```
+This replaces excess em dashes with your natural punctuation devices. The threshold is set by the installer based on your writing analysis.
+
 ## Updating an Existing Profile
 
 If `~/.claude/voice-profile.md` already exists:
