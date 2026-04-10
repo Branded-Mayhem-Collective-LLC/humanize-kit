@@ -3,6 +3,36 @@ from collections import Counter
 from statistics import mean, stdev
 
 
+STOPWORDS = {
+    'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
+    'of', 'with', 'by', 'from', 'is', 'are', 'was', 'were', 'be', 'been',
+    'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would',
+    'could', 'should', 'may', 'might', 'shall', 'can', 'this', 'that',
+    'these', 'those', 'i', 'you', 'he', 'she', 'it', 'we', 'they', 'me',
+    'him', 'her', 'us', 'them', 'my', 'your', 'his', 'its', 'our', 'their',
+    'what', 'which', 'who', 'whom', 'when', 'where', 'why', 'how', 'not',
+    'no', 'so', 'if', 'then', 'than', 'too', 'very', 'just', 'about', 'up',
+    'out', 'all', 'also', 'as', 'into', 'over', 'after', 'before', 'between',
+    'through', 'during', 'without', 'again', 'there', 'here', 'more', 'some',
+    'such', 'only', 'other', 'new', 'now', 'any', 'each', 'much', 'own',
+    'same', 'even', 'most', 'many', 'well', 'back', 'still',
+}
+
+AI_BLACKLIST = {
+    'leverage', 'synergy', 'paradigm', 'disrupt', 'ecosystem', 'furthermore',
+    'additionally', 'moreover', 'robust', 'streamline', 'cutting-edge',
+    'game-changer', 'unlock', 'empower', 'harness',
+    'delve', 'crucial', 'pivotal', 'testament', 'tapestry', 'vibrant',
+    'meticulous', 'meticulously', 'bolstered', 'garner', 'enduring',
+    'intricate', 'intricacies', 'interplay', 'showcase', 'showcasing',
+    'enhance', 'enhancing', 'fostering', 'highlighting', 'valuable',
+    'nestled', 'groundbreaking', 'renowned', 'profound', 'exemplifies',
+    'navigating', 'landscape', 'holistic', 'comprehensive',
+    'serves as', 'stands as', 'features',
+    'emphasizing',
+}
+
+
 def analyze_punctuation(text: str) -> dict:
     """
     Counts punctuation devices in text and calculates ratios.
@@ -110,4 +140,45 @@ def analyze_rhythm(text: str) -> dict:
         'fragment_rate': fragment_rate,
         'conjunction_starters': conjunction_starters,
         'count': len(sentences),
+    }
+
+
+def analyze_vocabulary(text: str) -> dict:
+    """
+    Analyze vocabulary signature of the given text.
+
+    Returns a dict with:
+    - top_words: list of (word, count) tuples, top 25 content words
+                 (excluding stopwords, min length 3), sorted by frequency desc
+    - whitelisted: sorted list of AI blacklist words the user uses 2+ times
+    - never_use: sorted AI blacklist minus whitelisted words
+    - unique_count: count of unique content words
+    - total_count: total content word tokens
+    """
+    # Extract lowercase words only (alpha characters)
+    raw_words = re.findall(r"[a-z]+(?:-[a-z]+)*", text.lower())
+
+    # Filter to content words: not stopwords, min length 3
+    content_words = [w for w in raw_words if w not in STOPWORDS and len(w) >= 3]
+
+    counts = Counter(content_words)
+
+    # Top 25 by frequency
+    top_words = counts.most_common(25)
+
+    # Words used 2+ times that appear in the AI blacklist
+    whitelisted = sorted(
+        word for word, cnt in counts.items()
+        if cnt >= 2 and word in AI_BLACKLIST
+    )
+
+    # AI blacklist minus whitelisted words
+    never_use = sorted(AI_BLACKLIST - set(whitelisted))
+
+    return {
+        'top_words': top_words,
+        'whitelisted': whitelisted,
+        'never_use': never_use,
+        'unique_count': len(counts),
+        'total_count': sum(counts.values()),
     }

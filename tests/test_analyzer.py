@@ -65,3 +65,31 @@ def test_rhythm_conjunction_starters():
     text = "Normal start. And then this. But also that. Or maybe not."
     result = analyze_rhythm(text)
     assert result['conjunction_starters'] == 3
+
+
+from engine.analyzer import analyze_vocabulary, AI_BLACKLIST
+
+def test_vocabulary_extracts_top_words():
+    text = ("build build build strategy strategy "
+            "the the the a a of of "
+            "brand brand brand client client")
+    result = analyze_vocabulary(text)
+    top_words = [w for w, c in result['top_words'][:5]]
+    assert 'build' in top_words
+    assert 'brand' in top_words
+    assert 'the' not in top_words
+
+def test_vocabulary_whitelists_user_words():
+    text = "This is crucial. Absolutely crucial. The crucial thing is crucial."
+    result = analyze_vocabulary(text)
+    assert 'crucial' in result['whitelisted']
+
+def test_vocabulary_blacklist_exists():
+    assert 'delve' in AI_BLACKLIST
+    assert 'furthermore' in AI_BLACKLIST
+    assert 'tapestry' in AI_BLACKLIST
+
+def test_vocabulary_never_use_excludes_whitelist():
+    text = "The crucial landscape of our enduring work is crucial."
+    result = analyze_vocabulary(text)
+    assert 'crucial' not in result['never_use']
