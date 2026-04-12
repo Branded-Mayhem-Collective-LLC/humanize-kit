@@ -1,7 +1,7 @@
 ---
 name: humanize-ig
 description: Rewrites text for Instagram captions — compact, lowercase, imperfect grammar, no em dashes, abbreviated phrasing. Defeats AI detection while sounding like a real person typed it on their phone. Loads your voice profile from ~/.claude/voice-profile.md for personalized output.
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: [text or "last" to use previous output]
 ---
 

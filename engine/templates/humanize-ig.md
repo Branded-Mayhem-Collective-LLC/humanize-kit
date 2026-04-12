@@ -1,7 +1,7 @@
 ---
 name: humanize-ig
 description: "AI pattern interrupter - rewrites AI-generated text for Instagram captions in YOUR authentic voice. Defeats AI detection while sounding like a real person typed it on their phone. Requires a voice profile (generate one with /voice-profiler or the installer). Use when the user wants to humanize Instagram captions, de-AI IG content, or make captions undetectable."
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: [text or "last" to use previous output]
 ---
 

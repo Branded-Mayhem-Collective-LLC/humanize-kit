@@ -1,7 +1,7 @@
 ---
 name: humanize
 description: "AI pattern interrupter - rewrites AI-generated text to defeat detection tools by breaking statistical AI patterns and rewriting in YOUR authentic voice. Requires a voice profile (generate one with /voice-profiler or the installer). Use when the user wants to humanize, de-AI, or make text undetectable."
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: [text or "last" to use previous output]
 ---
 
