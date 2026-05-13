@@ -166,7 +166,7 @@ v1 had 16 patterns (max score 48). v2 adds 7 Tier 2 patterns that newer classifi
 
 ## Contraband from Branded Mayhem
 
-Free sample from [Contraband](https://contraband.brandedmayhem.com). Claude Code skills for brand strategy, content, SEO, conversion optimization, and sales methodology. Built by people who run an agency, not prompt engineers who read a blog post.
+Free sample from [Contraband](https://contraband.brandedmayhem.com). Claude skills for brand strategy, content, SEO, conversion optimization, and sales methodology — work in Claude.ai (web), Claude Code, Claude desktop, Cursor, or Codex. Built by people who run an agency, not prompt engineers who read a blog post.
 
 Contraband builds the tools. Branded Mayhem builds the strategy. [brandedmayhem.com](https://brandedmayhem.com)
 
