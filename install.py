@@ -388,7 +388,12 @@ def generate_and_install(profile, samples):
         print('  No skills rendered. Check your templates directory.')
         return
 
-    de_emdash_src = Path(__file__).parent / 'engine' / 'de_emdash.py'
+    # de_emdash.py moved 2026-05-19 from engine/ → skills/voice-profiler/scripts/
+    # to guarantee it travels with the voice-profiler skill (esp. Cowork manual
+    # upload). Keep the old path as a fallback for in-progress installs.
+    de_emdash_src = Path(__file__).parent / 'skills' / 'voice-profiler' / 'scripts' / 'de_emdash.py'
+    if not de_emdash_src.exists():
+        de_emdash_src = Path(__file__).parent / 'engine' / 'de_emdash.py'
 
     # Install to Claude Code
     if install_claude_code:

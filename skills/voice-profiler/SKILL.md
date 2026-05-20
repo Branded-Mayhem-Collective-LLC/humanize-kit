@@ -172,15 +172,16 @@ version: 1.0
 
 ## Post-Processing Note
 
-After generating content with `/humanize-kit:humanize`, run the em dash post-processor. Path depends on surface:
+After generating content with `/humanize-kit:humanize`, run the em dash post-processor. The script ships inside this skill's `scripts/` folder so it travels with the voice-profiler skill regardless of install method (plugin install on Claude Code, plugin install on Claude.ai web/Cowork, manual upload of just this skill folder, or legacy `install.py`):
 
 - **Claude Code (plugin install):**
-  `python3 "${CLAUDE_PLUGIN_ROOT}/engine/de_emdash.py" --max-emdash 2`
-  (or if installed via the legacy `install.py`: `python3 ~/.claude/skills/humanize/de_emdash.py --max-emdash 2`)
-- **Claude.ai web / Desktop:**
-  `python3 /mnt/skills/user/humanize-kit/engine/de_emdash.py --max-emdash 2`
+  `python3 "${CLAUDE_PLUGIN_ROOT}/skills/voice-profiler/scripts/de_emdash.py" --max-emdash 2`
+- **Claude.ai web / Cowork / Desktop (plugin install):**
+  paths resolve the same way Claude.ai exposes plugin assets — typically the script is reachable relative to the skill's runtime root. If `${CLAUDE_PLUGIN_ROOT}` doesn't substitute, try `python3 /mnt/skills/user/voice-profiler/scripts/de_emdash.py --max-emdash 2` (manual upload) or the plugin cache equivalent.
+- **Legacy install.py path:**
+  `python3 ~/.claude/skills/voice-profiler/scripts/de_emdash.py --max-emdash 2` (current) or `~/.claude/skills/humanize/de_emdash.py` (older installs prior to 2026-05-19).
 
-This replaces excess em dashes with your natural punctuation devices.
+This replaces excess em dashes with your natural punctuation devices (stdlib-only, no external dependencies).
 
 ## Updating an Existing Profile
 
