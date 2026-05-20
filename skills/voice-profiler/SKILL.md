@@ -66,7 +66,15 @@ Let them correct you. The profile should feel like looking in a mirror, not a ca
 
 ## Output: The Voice Profile File
 
-Generate the profile and write it to `~/.claude/voice-profile.md`. Tell the user where it's saved and that `/humanize` will automatically load it.
+Where to write the profile depends on the surface — pick the right one and tell the user where it landed:
+
+**Claude Code (plugin install):**
+- Write to `~/.claude/voice-profile.md`
+- Tell the user: "Voice profile saved to `~/.claude/voice-profile.md`. `/humanize-kit:humanize` will load it automatically every session."
+
+**Claude.ai web / Claude Desktop:**
+- Write to `/mnt/user-data/outputs/voice-profile.md`
+- Tell the user: "Voice profile saved to `/mnt/user-data/outputs/voice-profile.md`. **Download it now and save it locally** — Claude.ai web doesn't persist files across sessions, so you'll need to re-upload it (via the file-attach UI) at the start of each session where you want to use `/humanize-kit:humanize`. Once uploaded, it lands in `/mnt/user-data/uploads/voice-profile.md` and the humanize skills auto-find it."
 
 ### Voice Profile Format
 
@@ -157,22 +165,26 @@ version: 1.0
 
 ## After Generation
 
-1. Write the file to `~/.claude/voice-profile.md`
-2. Tell the user: "Voice profile saved to `~/.claude/voice-profile.md`. The `/humanize` skill will automatically load it."
-3. Offer: "Want to test it? Paste any AI-generated text and I'll run `/humanize` using your new profile."
+1. Write the file to the surface-appropriate path (see "Output: The Voice Profile File" section above for the dual-surface paths).
+2. Tell the user where it was saved and what they need to do next (Claude Code: nothing — it auto-loads. Claude.ai web: download + re-upload next session).
+3. Offer: "Want to test it? Paste any AI-generated text and I'll run `/humanize-kit:humanize` using your new profile."
 4. Offer: "Want to add platform-specific overrides? (LinkedIn voice, email voice, Instagram voice)"
 
 ## Post-Processing Note
 
-After generating content with `/humanize`, run it through the em dash post-processor:
-```
-python3 ~/.claude/skills/humanize/de_emdash.py --max-emdash 2
-```
-This replaces excess em dashes with your natural punctuation devices. The threshold is set by the installer based on your writing analysis.
+After generating content with `/humanize-kit:humanize`, run the em dash post-processor. Path depends on surface:
+
+- **Claude Code (plugin install):**
+  `python3 "${CLAUDE_PLUGIN_ROOT}/engine/de_emdash.py" --max-emdash 2`
+  (or if installed via the legacy `install.py`: `python3 ~/.claude/skills/humanize/de_emdash.py --max-emdash 2`)
+- **Claude.ai web / Desktop:**
+  `python3 /mnt/skills/user/humanize-kit/engine/de_emdash.py --max-emdash 2`
+
+This replaces excess em dashes with your natural punctuation devices.
 
 ## Updating an Existing Profile
 
-If `~/.claude/voice-profile.md` already exists:
+If a voice profile already exists at the surface-appropriate path:
 1. Read it first
 2. Ask: "You already have a voice profile. Want to update it with new samples, or start fresh?"
 3. If updating: merge new observations with existing profile, keeping what still fits

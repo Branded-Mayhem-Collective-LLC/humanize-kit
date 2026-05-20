@@ -52,9 +52,13 @@ python3 install.py
 
 Copies skills into `~/.claude/skills/`, validates structure, walks you through voice profiling. 5-10 minutes. Use this only if you cannot use the plugin install path; skills won't be namespaced and won't get the SessionStart voice-profile hook.
 
-**Claude Desktop / claude.ai:**
+**Claude.ai web / Claude Desktop:**
 
-Download the `.zip` from [contraband.brandedmayhem.com](https://contraband.brandedmayhem.com). Upload through Settings > Customize > Skills.
+Paste this repo's URL into Claude and ask: "Install the skills from https://github.com/Branded-Mayhem-Collective-LLC/humanize-kit". Claude fetches the repo, registers the skills, and asks permission.
+
+Or download the repo as `.zip` (GitHub Code button → Download ZIP, or grab it from [contraband.brandedmayhem.com](https://contraband.brandedmayhem.com)), unzip, then upload skill folders via **Settings → Customize → Skills**.
+
+Note: voice profiles do not persist across Claude.ai web sessions. `/voice-profiler` writes the profile to `/mnt/user-data/outputs/voice-profile.md` — download it locally, then re-upload it at the start of each session where you want `/humanize` to use it. The SKILL.md handles the path resolution automatically.
 
 ## Build your voice profile
 

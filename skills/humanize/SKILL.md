@@ -13,12 +13,19 @@ This does not guarantee passing a detection classifier when output is pasted dir
 
 ## Voice Profile Loading
 
-Before rewriting, load the user's voice profile:
+Before rewriting, load the user's voice profile. The lookup paths depend on the surface:
 
-1. Check for `~/.claude/voice-profile.md` (default location)
-2. If not found, check for `./voice-profile.md` in the current directory
-3. If no profile exists, tell the user: "No voice profile found. Run `/voice-profiler` first to build your writing voice profile, or create `~/.claude/voice-profile.md` manually."
-4. Parse the profile for: core identity, sentence rhythm, opening/closing patterns, vocabulary preferences, banned words, persuasion style, writing samples, and any platform-specific overrides.
+**Claude Code (plugin install):**
+1. Check `~/.claude/voice-profile.md` (default, persistent — written by `/voice-profiler`)
+2. If not found, check `./voice-profile.md` in the current directory
+3. If still not found, tell the user: "No voice profile found at `~/.claude/voice-profile.md`. Run `/humanize-kit:voice-profiler` first to build it, or create the file manually."
+
+**Claude.ai web / Claude Desktop:**
+1. Check `/mnt/user-data/uploads/voice-profile.md` (the user uploads it at session start)
+2. If not found, check `/home/claude/voice-profile.md` (if the user dropped it inline)
+3. If still not found, tell the user: "No voice profile found. Upload your `voice-profile.md` via the file-attach UI (it'll land in `/mnt/user-data/uploads/`), or run `/humanize-kit:voice-profiler` to build one — voice-profiler will write it to `/mnt/user-data/outputs/` so you can download it for next session."
+
+Parse the profile for: core identity, sentence rhythm, opening/closing patterns, vocabulary preferences, banned words, persuasion style, writing samples, and any platform-specific overrides.
 
 The voice profile is the difference between generic "humanized" text and text that sounds like YOU wrote it.
 
@@ -96,7 +103,7 @@ Mode:  [SURGICAL | MODERATE | FULL REWRITE]
 
 ## Step 3: REWRITE — Apply Voice Profile
 
-Load the user's voice profile from `~/.claude/voice-profile.md` and apply it systematically:
+Load the user's voice profile from the path resolved in "Voice Profile Loading" above (Claude Code: `~/.claude/voice-profile.md`; Claude.ai web: `/mnt/user-data/uploads/voice-profile.md`) and apply it systematically:
 
 ### Voice Profile Application
 

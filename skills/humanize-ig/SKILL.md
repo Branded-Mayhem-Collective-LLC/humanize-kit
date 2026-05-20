@@ -13,7 +13,12 @@ This is the Instagram-specific sibling of `/humanize`. Same pattern-interrupter 
 
 ## Voice Profile Loading
 
-Before rewriting, check for a voice profile at `~/.claude/voice-profile.md` or `./voice-profile.md`. If found, load any Instagram-specific overrides from the "Platform Overrides" section. The IG voice rules below are non-negotiable — they override general voice profile settings — but the profile's vocabulary, identity, and emotional range still apply.
+Before rewriting, check for a voice profile. Lookup paths depend on the surface:
+
+- **Claude Code (plugin install):** `~/.claude/voice-profile.md`, then `./voice-profile.md` as fallback
+- **Claude.ai web / Claude Desktop:** `/mnt/user-data/uploads/voice-profile.md`, then `/home/claude/voice-profile.md` as fallback
+
+If found, load any Instagram-specific overrides from the "Platform Overrides" section. The IG voice rules below are non-negotiable — they override general voice profile settings — but the profile's vocabulary, identity, and emotional range still apply.
 
 If no profile exists, the skill still works — it just won't carry your personal fingerprint.
 
