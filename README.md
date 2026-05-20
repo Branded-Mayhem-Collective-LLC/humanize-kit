@@ -20,7 +20,7 @@ Detection tools catch it too. Pangram, GPTZero, Copyleaks - they're keying on st
 
 **Voice Profiler** interviews you, analyzes your real writing samples, and builds a structured voice profile. Your rhythm. Your vocabulary. Your weird grammar habits. The way you actually close an email.
 
-**Humanize** scores any text against 23 AI detection patterns, then rewrites it using your profile. Breaks the statistical fingerprint while sounding like you.
+**Humanize** scores any text against 23 AI detection patterns, then rewrites it using your profile. Breaks the statistical fingerprint and reads in your voice. (Read the [workflow notes](#workflow-notes-what-actually-passes-a-detector) before you trust the output to pass a classifier — pasting it directly is not enough.)
 
 **Humanize IG** does the same thing but for Instagram. Lowercase. Dense blocks. Imperfect grammar. Phone-typed energy.
 
@@ -28,13 +28,29 @@ Detection tools catch it too. Pangram, GPTZero, Copyleaks - they're keying on st
 
 ## Install
 
-**Claude Code:**
+**Claude Code (plugin — recommended):**
+
+```text
+/plugin marketplace add Branded-Mayhem-Collective-LLC/humanize-kit
+/plugin install humanize-kit@bmc-humanize-kit
+```
+
+Skills land namespaced as `/humanize-kit:humanize`, `/humanize-kit:humanize-ig`, and `/humanize-kit:voice-profiler`. A session-start hook will warn you if `~/.claude/voice-profile.md` doesn't exist yet so you know the next step.
+
+Once humanize-kit lands in [Anthropic's community marketplace](https://github.com/anthropics/claude-plugins-community) (submitted for review), you'll also be able to:
+
+```text
+/plugin marketplace add anthropics/claude-plugins-community
+/plugin install humanize-kit@claude-community
+```
+
+**Claude Code (legacy, standalone skills):**
 
 ```bash
 python3 install.py
 ```
 
-Copies skills, validates structure, walks you through voice profiling. 5-10 minutes.
+Copies skills into `~/.claude/skills/`, validates structure, walks you through voice profiling. 5-10 minutes. Use this only if you cannot use the plugin install path; skills won't be namespaced and won't get the SessionStart voice-profile hook.
 
 **Claude Desktop / claude.ai:**
 
@@ -45,7 +61,7 @@ Download the `.zip` from [contraband.brandedmayhem.com](https://contraband.brand
 This is the step that matters. Without it, `/humanize` produces generic-human text. With it, it produces YOUR-human text.
 
 ```
-/voice-profiler
+/humanize-kit:voice-profiler
 ```
 
 Paste 3-5 pieces of writing you're proud of. Not your cleanest work - your most honest work. The drunk text that landed. The email you sent without editing. The post that felt risky.
@@ -60,17 +76,21 @@ Plain text. Yours to read, edit, version.
 
 ## Use it
 
+If installed as a plugin, slash commands are namespaced. If installed via the legacy `install.py`, use the unprefixed form.
+
 ```
-/humanize [paste AI-generated text here]
+/humanize-kit:humanize [paste AI-generated text here]
 ```
 
 ```
-/humanize last
+/humanize-kit:humanize last
 ```
 
 ```
-/humanize-ig [paste text here]
+/humanize-kit:humanize-ig [paste text here]
 ```
+
+You can also describe what you want in plain English and Claude will pick the skill automatically — "humanize this", "rewrite that in my voice", "de-AI the last paragraph" all work.
 
 ---
 
@@ -145,6 +165,31 @@ and everything above it stops collapsing
 
 ---
 
+## Workflow notes — what actually passes a detector
+
+Honest disclosure from real-world use, not a benchmark.
+
+**Pasting `/humanize` output directly into Pangram (or similar) does not reliably pass.** Modern classifiers — Pangram 3.0 especially — catch polished prose patterns even after the statistical features have been disrupted. If you treat this kit as "rewrite → paste into Pangram → ship," you'll be disappointed.
+
+**The workflow that has worked in our own PR submissions and outreach:**
+
+1. Run `/humanize-kit:humanize` (or `/humanize-kit:humanize-ig`) with a strong voice profile loaded.
+2. Read the output. Don't ship it as-is.
+3. **Manually retype it** — type it out fresh into the form/email/CMS where it's going. Or **dictate it verbally** and let your phone's voice-to-text transcribe it.
+4. *Then* submit.
+
+The retype step introduces the kind of micro-variation a classifier can't model: your transcription tics, the words your fingers reach for, the slight rewordings that happen between brain and keyboard. In tests against Pangram (anecdotal, single-user, with the author's voice profile) this consistently flips a "highly likely AI" score to "human" or "inconclusive."
+
+**Limits of this claim:**
+- This is not independently verified. It's one operator's repeated testing.
+- It depends on a real voice profile. A weak or generic profile produces a weak result.
+- Detection tools update constantly. What works this month may not work next quarter.
+- It will never "guarantee" anything. AI detection is probabilistic and adversarial.
+
+If you're doing PR outreach to outlets that screen with Pangram, or any context where being flagged costs you a placement, treat this kit as **a writing assistant that handles voice consistency**, not **a detection-evasion guarantee**. The retype step is what closes the gap.
+
+---
+
 ## FAQ
 
 **Do I need a voice profile?**
@@ -154,10 +199,13 @@ Technically no. Practically yes. Without one you get generic-human. With one you
 Save them as different files. `voice-profile-linkedin.md`, `voice-profile-email.md`. Tell Claude which to load.
 
 **Does this guarantee passing AI detection?**
-No. Detection is probabilistic and evolving. Breaking 23 statistical patterns while writing in an authentic voice makes it significantly harder to flag. Not impossible.
+No. See the workflow notes above. Pasting `/humanize` output directly into a classifier does not reliably pass. The retype-before-submit workflow has worked anecdotally for the author but is not independently verified.
+
+**Why submit to Anthropic's community marketplace if it's also paid product adjacent?**
+Loss-leader by design. The 3 skills here are genuinely useful standalone. The paid [Content & Creative Lab](https://github.com/Branded-Mayhem-Collective-LLC/content-creative-lab) bundles these plus 5 more (ai-focus-group, creative-thinking-ai, linkedin-authority, mayhem-method-ai-use, story-spine).
 
 **Works with Cursor or Codex?**
-Yes. Standard SKILL.md files. Anything that reads the format.
+Yes. Standard SKILL.md files. Anything that reads the format. Note: the plugin install path is Claude Code specific. For Cursor/Codex use the legacy `install.py` or copy the `skills/` folder directly into the tool's skill directory.
 
 **What changed from v1 to v2?**
 v1 had 16 patterns (max score 48). v2 adds 7 Tier 2 patterns that newer classifiers catch - significance inflation, superficial -ing clauses, copulative avoidance, rule of three, elegant variation, negative parallelisms. Max score is 69. Plus the em dash post-processor, the automated installer, and .zip packaging for Desktop/Online.
