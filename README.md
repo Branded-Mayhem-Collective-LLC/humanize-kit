@@ -1,5 +1,13 @@
 # Humanize Kit
 
+[![Claude Code Plugin](https://img.shields.io/badge/Claude_Code-Plugin-D97757?logo=claude&logoColor=white)](https://github.com/anthropics/claude-plugins-community)
+[![Anthropic Community Marketplace](https://img.shields.io/badge/Anthropic_Community-Marketplace-D97757?logo=anthropic&logoColor=white)](https://github.com/anthropics/claude-plugins-community)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/Branded-Mayhem-Collective-LLC/humanize-kit?style=social)](https://github.com/Branded-Mayhem-Collective-LLC/humanize-kit)
+
+> **Install:** `/plugin marketplace add anthropics/claude-plugins-community` then `/plugin install humanize-kit@claude-community`
+> Or on Claude.ai Cowork: paste this repo's URL.
+
 Your AI writing sounds like AI writing. You know it. The people reading it know it. The detection tools definitely know it.
 
 This fixes that.
