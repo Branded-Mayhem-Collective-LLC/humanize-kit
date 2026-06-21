@@ -3,13 +3,13 @@
   "name": "humanize-kit",
   "displayName": "Humanize Kit",
   "version": "2.1.0",
-  "description": "AI pattern interrupter for Claude. Three skills — humanize, humanize-ig, voice-profiler — that build a voice fingerprint from your real writing and rewrite AI output to match it. Free + MIT. The loss-leader gateway to Contraband (https://contraband.brandedmayhem.com).",
+  "description": "AI pattern interrupter for Claude. Three skills — humanize, humanize-ig, voice-profiler — that build a voice fingerprint from your real writing and rewrite AI output to match it. Free + MIT. The free gateway to the paid Branded Mayhem skill lineup (https://brandedmayhem.com).",
   "author": {
     "name": "Branded Mayhem Collective",
     "email": "hello@brandedmayhem.com",
     "url": "https://brandedmayhem.com"
   },
-  "homepage": "https://contraband.brandedmayhem.com",
+  "homepage": "https://brandedmayhem.com",
   "repository": "https://github.com/Branded-Mayhem-Collective-LLC/humanize-kit",
   "license": "MIT",
   "keywords": [

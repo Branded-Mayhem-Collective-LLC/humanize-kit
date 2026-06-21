@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Humanize Kit Installer — Guided CLI wizard.
-Contraband from Branded Mayhem.
+From Branded Mayhem.
 """
 
 import json
@@ -48,7 +48,7 @@ def print_header():
     clear_screen()
     print('=' * 56)
     print('  HUMANIZE KIT INSTALLER')
-    print('  Contraband from Branded Mayhem')
+    print('  From Branded Mayhem')
     print('=' * 56)
     print()
 
@@ -512,7 +512,7 @@ def done():
     for zf in sorted(dl.glob('*-skill.zip')):
         print(f'  Zip download   -> {zf}')
     print()
-    print('Contraband builds the tools. Branded Mayhem builds the strategy.')
+    print('Branded Mayhem builds the tools and the strategy.')
     print('brandedmayhem.com')
     print()
 

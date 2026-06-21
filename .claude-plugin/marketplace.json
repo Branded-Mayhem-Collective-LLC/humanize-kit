@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-marketplace.json",
   "name": "bmc-humanize-kit",
-  "description": "Branded Mayhem Collective — Humanize Kit. Free, public, MIT. The loss-leader gateway to the paid Contraband lineup (https://contraband.brandedmayhem.com). Submitted to Anthropic's claude-community marketplace for free distribution.",
+  "description": "Branded Mayhem Collective — Humanize Kit. Free, public, MIT. The free gateway to the paid Branded Mayhem skill lineup (https://brandedmayhem.com). Submitted to Anthropic's claude-community marketplace for free distribution.",
   "owner": {
     "name": "Branded Mayhem Collective",
     "email": "hello@brandedmayhem.com"

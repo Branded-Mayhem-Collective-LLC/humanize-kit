@@ -6,7 +6,7 @@ This fixes that.
 
 Three Claude skills that analyze your real writing, build a fingerprint of how you actually sound, then rewrite AI output to match. Not a generic "humanized" version. Text that sounds like you typed it.
 
-Free. Open source. [Contraband from Branded Mayhem](https://contraband.brandedmayhem.com).
+Free. Open source. [Branded Mayhem](https://brandedmayhem.com).
 
 ---
 
@@ -56,7 +56,7 @@ Copies skills into `~/.claude/skills/`, validates structure, walks you through v
 
 Paste this repo's URL into Claude and ask: "Install the skills from https://github.com/Branded-Mayhem-Collective-LLC/humanize-kit". Claude fetches the repo, registers the skills, and asks permission.
 
-Or download the repo as `.zip` (GitHub Code button → Download ZIP, or grab it from [contraband.brandedmayhem.com](https://contraband.brandedmayhem.com)), unzip, then upload skill folders via **Settings → Customize → Skills**.
+Or download the repo as `.zip` (GitHub Code button → Download ZIP, or grab it from [brandedmayhem.com](https://brandedmayhem.com)), unzip, then upload skill folders via **Settings → Customize → Skills**.
 
 Note: voice profiles do not persist across Claude.ai web sessions. `/voice-profiler` writes the profile to `/mnt/user-data/outputs/voice-profile.md` — download it locally, then re-upload it at the start of each session where you want `/humanize` to use it. The SKILL.md handles the path resolution automatically.
 
@@ -216,11 +216,11 @@ v1 had 16 patterns (max score 48). v2 adds 7 Tier 2 patterns that newer classifi
 
 ---
 
-## Contraband from Branded Mayhem
+## From Branded Mayhem
 
-Free sample from [Contraband](https://contraband.brandedmayhem.com). Claude skills for brand strategy, content, SEO, conversion optimization, and sales methodology — work in Claude.ai (web), Claude Code, Claude desktop, Cursor, or Codex. Built by people who run an agency, not prompt engineers who read a blog post.
+Free sample from [Branded Mayhem](https://brandedmayhem.com). Claude skills for brand strategy, content, SEO, conversion optimization, and sales methodology — work in Claude.ai (web), Claude Code, Claude desktop, Cursor, or Codex. Built by people who run an agency, not prompt engineers who read a blog post.
 
-Contraband builds the tools. Branded Mayhem builds the strategy. [brandedmayhem.com](https://brandedmayhem.com)
+Branded Mayhem builds the tools and the strategy. [brandedmayhem.com](https://brandedmayhem.com)
 
 ---
 
