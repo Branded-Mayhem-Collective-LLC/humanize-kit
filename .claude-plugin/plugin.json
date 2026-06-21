@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "humanize-kit",
   "displayName": "Humanize Kit",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "AI pattern interrupter for Claude. Three skills — humanize, humanize-ig, voice-profiler — that build a voice fingerprint from your real writing and rewrite AI output to match it. Free + MIT. The free gateway to the paid Branded Mayhem skill lineup (https://brandedmayhem.com).",
   "author": {
     "name": "Branded Mayhem Collective",
