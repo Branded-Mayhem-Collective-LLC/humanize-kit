@@ -78,12 +78,22 @@ These emerge across the full document. Pangram segments longer documents and cla
 | 3.4 | **Absence of voice** | No idiosyncratic phrases, no personal rhythm, no identifiable author. Could have been written by anyone. | |
 | 3.5 | **Symmetrical structure** | Equal weight given to each section/point. Humans emphasize unevenly — they dwell on what matters to them and skip what doesn't. | |
 
+### Tier 4 — Discourse Signals (durable — survives lexical editing)
+
+Structural, not sentence-level. StoryScope (Russell et al., 2026, arXiv:2604.03136) found that stripping every stylistic artifact drops AI-detection ~97%→3% on style detectors but only 1.6 pts on discourse features. Tiers 1–3 fix the fleeting layer; this is the layer that survives an edit pass. Only findings that transfer to business/marketing/essay writing are here.
+
+| # | Pattern | What Detectors See | Score 0-3 |
+|---|---------|-------------------|-----------|
+| 4.1 | **Thematic over-determination** | The piece explains its own point. Sections end with the takeaway spelled out — "This highlights the importance of...", "Ultimately, what matters is...", "The lesson here is...". StoryScope's #1 human-vs-AI separator: AI states the theme 77% of the time vs 52% human. The durable form of "kill the summary." | |
+| 4.2 | **Vague reference, no named specific** | "Studies suggest," "experts say," "many businesses struggle" — abstraction where a name belongs. Humans cite specific named sources/companies/numbers ~2x more. | |
+| 4.3 | **Sealed page (no reader address)** | Writing as though no one is reading it. Humans address the reader far more (28% vs 7%). If your voice naturally addresses the reader ("want me to send it?", "let me know either way"), that's a human signal to KEEP — flag its *absence*, never strip its presence. | |
+
 ## Step 2: REPORT — Show the Score
 
 Calculate the aggregate score:
-- **Max possible**: 48 (16 patterns x 3)
+- **Max possible**: 57 (19 patterns x 3)
 - **Aggregate**: sum of all scores
-- **Percentage**: aggregate / 48
+- **Percentage**: aggregate / max possible (57) × 100
 
 Display a compact report:
 
@@ -93,8 +103,10 @@ PATTERN ANALYSIS
 Tier 1 (Statistical):  [score]/12  — [brief note on worst offenders]
 Tier 2 (Deep Learning): [score]/24  — [brief note on worst offenders]
 Tier 3 (Document):     [score]/12  — [brief note on worst offenders]
+Tier 4 (Discourse):    [score]/9   — [brief note on worst offenders]   ← DURABLE. Survives lexical editing.
 ────────────────
-Total: [score]/48 ([percentage]%)
+Total: [score]/57 ([percentage]%)
+Tier 4 gate: [PASS | TRIPPED]
 Mode:  [SURGICAL | MODERATE | FULL REWRITE]
 ```
 
@@ -102,6 +114,8 @@ Mode:  [SURGICAL | MODERATE | FULL REWRITE]
 - 0-15% → **SURGICAL** — Touch only flagged sentences. Preserve original structure.
 - 16-50% → **MODERATE** — Rewrite flagged sections. Adjust structure and transitions.
 - 51%+ → **FULL REWRITE** — Rebuild from scratch. Keep only the core argument/message.
+
+**Tier 4 gate (overrides mode):** If the Tier 4 subtotal ≥ 4/9 OR any single Tier 4 row scores 3, the piece is NOT clean regardless of Tiers 1–3, and mode is forced to at least MODERATE. Discourse signatures survive lexical editing (StoryScope: LAMP dropped detection only 1.6 pts). A clean em-dash count on a piece that still explains its own point is still flagged.
 
 ## Step 3: REWRITE — Apply Voice Profile
 
@@ -193,6 +207,16 @@ Apply these transformations based on which patterns scored highest:
 **For symmetrical structure (3.5):**
 - Spend more words on what matters most. Skim past the obvious.
 
+**For thematic over-determination (4.1):**
+- Cut the sentence that states the point. The reader is there — they don't need it named. Delete "This highlights...", "Ultimately...", "The takeaway is...".
+- End on the observation, not the interpretation of the observation.
+
+**For vague reference (4.2):**
+- Name it. Not "studies suggest" — the actual source, or drop the appeal. Not "many businesses" — the specific case.
+
+**For sealed page (4.3):**
+- If your voice addresses the reader, keep it — it's a human signal, not an AI tell. If a rewrite stripped it, put it back. Only flag writing that never once acknowledges the reader.
+
 ## Step 4: OUTPUT
 
 Present the rewritten text cleanly. Then show a brief before/after:
@@ -200,8 +224,9 @@ Present the rewritten text cleanly. Then show a brief before/after:
 ```
 REWRITE COMPLETE
 ────────────────
-Original score: [X]/48 ([Y]%)
-Estimated new score: [X]/48 ([Y]%)
+Original score: [X]/57 ([Y]%)
+Estimated new score: [X]/57 ([Y]%)
+Tier 4 gate: [PASS | TRIPPED]
 Patterns broken: [list the ones that changed significantly]
 Mode applied: [SURGICAL | MODERATE | FULL REWRITE]
 Voice profile: [name from profile or "default"]
